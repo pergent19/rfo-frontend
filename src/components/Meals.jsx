@@ -4,7 +4,7 @@ import MealItem from './MealItem';
 export default function Meals() {
     const[loadedMeals, setLoadedMeals] = useState([]);
     const prod = "https://rfo-api.onrender.com/api/meals/get"
-    const local = "http://localhost:3000/api/meals/get"
+    // const local = "http://localhost:3000/api/meals/get"
 
     useEffect(() => {
         async function fetchMeals() {

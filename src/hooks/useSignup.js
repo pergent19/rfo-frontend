@@ -6,7 +6,7 @@ export const useSignup = () => {
   const [isLoading, setIsLoading] = useState(null);
   const { dispatch } = useAuthContext();
   const prod = "https://rfo-api.onrender.com/api/user/signup"
-  const local = "http://localhost:3000/api/user/signup"
+  // const local = "http://localhost:3000/api/user/signup"
 
   const signup = async (email, password) => {
     setIsLoading(true);

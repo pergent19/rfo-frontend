@@ -7,7 +7,7 @@ import { useCartContext } from "../hooks/useCartContext";
 export default function MealItem({meal}) {
   const { dispatchCartAction } = useCartContext();
   const prod = "https://rfo-api.onrender.com/"
-  const local = "http://localhost:3000/"
+  // const local = "http://localhost:3000/"
 
 
   function handleAddMealToCart() {
