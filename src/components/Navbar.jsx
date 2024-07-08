@@ -11,8 +11,7 @@ const Navbar = () => {
   const { user } = useAuthContext();
   const { items } = useCartContext();
 
-  const userProgressCtx = useContext(UserProgressContext)
-  console.log(userProgressCtx)
+  const userProgressCtx = useContext(UserProgressContext);
 
   const totalCartItems= items.reduce((totalNumberOfItems, item) => {
     return totalNumberOfItems + item.quantity;

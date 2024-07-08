@@ -7,10 +7,14 @@ import { currencyFormatter } from '../util/formatting'
 import { useCartContext } from "../hooks/useCartContext";
 import { UserProgressContext } from '../context/UserProgressContext';
 import CartItem from './CartItem'
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export default function Cart() {
   const { items, dispatchCartAction } = useCartContext();
-  const userProgressCtx = useContext(UserProgressContext)
+  const { user } = useAuthContext();
+  const userProgressCtx = useContext(UserProgressContext);
+  const prod = "https://rfo-api.onrender.com/"
+  //const local =  "http://localhost:3000/"
 
   const cartTotal = items.reduce((totalPrice, item) => totalPrice + item.quantity * item.price, 0)
 
@@ -22,18 +26,58 @@ export default function Cart() {
     userProgressCtx.showCheckout();
   }
 
-  function handleAddMealToCart(meal) {
+  async function handleAddMealToCart(meal) {
+
+    const response = await fetch(
+      `${prod}api/meals`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(meal),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
+    const json = await response.json();
+    
     dispatchCartAction({
       type: 'ADD_ITEM', 
       meal
     })
+
+    dispatchCartAction({ 
+      type: 'SET_CART', 
+      items: json 
+    });
+
   }
 
-  function handleRemoveMealToCart(id) {
+  async function handleRemoveMealToCart(id) {
+    const item = {  id }
+    const response = await fetch(
+      `${prod}api/meals/removeItem`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(item),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
+
+    const json = await response.json();
+
     dispatchCartAction({
       type: 'REMOVE_ITEM', 
       id
     })
+
+    dispatchCartAction({ 
+      type: 'SET_CART', 
+      items: json 
+    });
   }
 
 
@@ -44,12 +88,12 @@ export default function Cart() {
         <ul>
             {items.map(item => (
               <CartItem 
-                key={item.id} 
+                key={item.productId} 
                 name={item.name} 
                 quantity={item.quantity} 
                 price={item.price}                 
                 onIncreaase={() => handleAddMealToCart(item)}
-                onDecrease={() => handleRemoveMealToCart(item.id)}
+                onDecrease={() => handleRemoveMealToCart(item.productId)}
                  />
             ))}
         </ul>
