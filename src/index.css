@@ -11,6 +11,8 @@ body {
   margin: 0;
   font-family: "Poppins";
 }
+
+/* -----------------------NAVBAR---------------------------------- */
 header {
   background: #fff;
 }
@@ -26,82 +28,22 @@ header a {
   color: #333;
   text-decoration: none;
 }
-.pages{
-  max-width: 1400px;
-  padding: 20px;
-  margin: 0 auto;
-}
-
-/* homepage */
-/* .home {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  gap: 100px;
-} */
-.workout-details {
-  background: #fff;
-  border-radius: 4px;
-  margin: 20px auto;
-  padding: 20px;
-  position: relative;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
-}
-.workout-details h4 {
-  margin: 0 0 10px 0;
-  font-size: 1.2em;
-  color: var(--primary);
-}
-.workout-details p {
-  margin: 0;
-  font-size: 0.9em;
-  color: #555;
-}
-.workout-details span {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
-  background: #f1f1f1;
-  padding: 6px;
-  border-radius: 50%;
-  color: #333;
-}
-
-/* new workout form */
-label, input {
-  display: block;
-}
-input {
-  padding: 10px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  width: 100%;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-form button {
-  background: var(--primary);
-  border: 0;
+.cart-button {
+  background-color: #777 !important;
   color: #fff;
-  padding: 10px;
-  font-family: "Poppins";
-  border-radius: 4px;
+  border: none;
+  padding: 10px 15px;
   cursor: pointer;
-}
-div.error {
-  padding: 10px;
-  background: #ffefef;
-  border: 1px solid var(--error);
-  color: var(--error);
   border-radius: 4px;
-  margin: 20px 0;
-}
-input.error {
-  border: 1px solid var(--error);
+  position: relative; /* Ensure position relative for absolute positioning */
+  font-size: 18px; /* Adjust icon size if needed */
+  border-radius: 50px;
 }
 
-/* navbar */
+.cart-button i {
+  position: relative; /* Ensure position relative for icon */
+}
+
 nav {
   display: flex;
   align-items: center;
@@ -120,25 +62,126 @@ nav button {
   font-size: 1em;
   margin-left:10px;
 }
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #ff3f3f;
+  color: #fff;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+/* -----------------------END NAVBAR---------------------------------- */
 
-/* auth forms */
-form.signup, form.login {
-  max-width: 400px;
-  margin: 40px auto;
-  padding: 20px;
-  background: #fff;
+
+
+
+/* -----------------------Login and Signup---------------------------------- */
+label, input {
+  display: block;
+}
+input {
+  padding: 15px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  border: 1px solid #ddd;
   border-radius: 4px;
+  box-sizing: border-box;
+}
+input:focus {
+  outline: none;
+  border: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+form button {
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+div.error {
+  padding: 10px;
+  background: #ffefef;
+  border: 1px solid var(--error);
+  color: var(--error);
+  border-radius: 4px;
+  margin: 20px 0;
+}
+input.error {
+  border: 1px solid var(--error);
 }
 
-/* Meals */
+form.signup, form.login {
+  width: 400px;
+  background: rgba(255, 255, 255, 0.8); /* Optional: Add a semi-transparent background for better readability */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-page, .signup-page {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../public/bg-landing2.jpg'); /* Adjust the path if necessary */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.create-account-btn {
+  padding: 10px;
+  color: #fff;
+  text-decoration: none;
+  background-color: #333;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  margin-bottom: 5px;
+}
+
+.login-account-btn {
+  text-align: center; /* Center-align the content */
+  margin-top: 20px;
+  font-size: 12px;
+}
+
+.login-account-btn p {
+  color: #777; /* Grayish color for the paragraph text */
+}
+
+.login-account-btn a {
+  color: #007bff; /* Link color */
+  text-decoration: none; /* Remove underline */
+  transition: color 0.3s; /* Smooth transition for color change */
+}
+
+.login-account-btn a:hover {
+  color: #0056b3; /* Change color on hover */
+}
+
+.login-account-btn a span {
+  text-decoration: none; /* Remove underline for the span */
+}
+/* ----------------------- END Login and Signup---------------------------------- */
+
+
+
+/* ---------------------------Meals ---------------------------------------------*/
 #meals {
   width: 90%;
   max-width: 70rem;
   list-style: none;
   margin: 2rem auto;
   padding: 1rem;
-  /* display: flex;
-  justify-content: center; */
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); 
   gap: 1rem;
@@ -191,13 +234,14 @@ form.signup, form.login {
 .meal-item-actions {
   margin-bottom: 1.5rem;
 }
+/* ---------------------------END Meals ---------------------------------------------*/
 
-/* button */
+/* --------------------------- button ---------------------------*/
 .button {
   font: inherit;
   cursor: pointer;
-  background-color: #EF3E36;
-  border: 1px solid #EF3E36;
+  background-color: var(--primary);
+  border: 1px solid var(--primary);
   color: #fff;
   padding: 0.5rem 1.5rem;
   border-radius: 4px;
@@ -216,15 +260,19 @@ form.signup, form.login {
   cursor: pointer;
   background-color: transparent;
   border: none;
-  color: #ffc404;
+  /* color: #ffc404; */
 }
 
-.text-button:hover,
+/* .text-button:hover,
 .text-button:active {
   color: #ffab04;
-}
+} */
 
-/* modal */
+
+/* --------------------------- END button ---------------------------*/
+
+
+/*--------------------------- modal --------------------------- */
 .modal {
   background-color: #e4ddd4;
   border-radius: 6px;
@@ -252,6 +300,11 @@ form.signup, form.login {
   }
 }
 
+/*---------------------------END  modal --------------------------- */
+
+
+
+/*--------------------------- CART --------------------------- */
 .cart h2 {
   margin: 1rem 0;
 }
@@ -262,6 +315,7 @@ form.signup, form.login {
   padding: 0;
 }
 
+
 .cart-total {
   display: flex;
   justify-content: flex-end;
@@ -271,11 +325,32 @@ form.signup, form.login {
   color: #46443c;
 }
 
-.cart-item {
+.cart-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0.5rem 0;
+}
+
+.cart-header p {
+  font-weight: bolder;
+}
+
+.cart-description{
+  color: #333;
+  font-weight: bold;
+}
+
+.cart-item, .cart-description  {
+  display: grid;
+  grid-template-columns: 240px 100px 100px 100px;
+  gap:30px; /* Optional: Adds spacing between the columns */
+  margin-bottom: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+.total-header, .total-col {
+  margin-left: 60px !important;
 }
 
 .cart-item p {
@@ -322,3 +397,19 @@ form.signup, form.login {
 .modal-actions .text-button:active {
   color: #312c1d;
 }
+
+.cart-img {
+  width: 40px;
+  height: 40px;
+}
+
+.cart-img-container {
+  margin-right: 10px;
+}
+
+.cart-prod-desc-container {
+  display: flex;
+  align-items: center;
+}
+
+/*--------------------------- END CART --------------------------- */

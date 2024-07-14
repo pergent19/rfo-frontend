@@ -5,10 +5,10 @@ export const useSignup = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
   const { dispatch } = useAuthContext();
-  const prod = "https://rfo-api.onrender.com/api/user/signup"
-  // const local = "http://localhost:3000/api/user/signup"
+  //const prod = "https://rfo-api.onrender.com/api/user/signup"
+  const prod = "http://localhost:3000/api/user/signup"
 
-  const signup = async (email, password) => {
+  const signup = async (email, password, confirmPassword) => {
     setIsLoading(true);
     setError(null);
 
@@ -18,7 +18,7 @@ export const useSignup = () => {
       {
         method: "POST",
         headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, confirmPassword }),
       }
     );
 

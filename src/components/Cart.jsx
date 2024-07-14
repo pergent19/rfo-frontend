@@ -13,11 +13,9 @@ export default function Cart() {
   const { items, dispatchCartAction } = useCartContext();
   const { user } = useAuthContext();
   const userProgressCtx = useContext(UserProgressContext);
-  const prod = "https://rfo-api.onrender.com/"
-  //const local =  "http://localhost:3000/"
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const cartTotal = items.reduce((totalPrice, item) => totalPrice + item.quantity * item.price, 0)
-
   function handleCloseCart() {
     userProgressCtx.hideCart();
   }
@@ -27,9 +25,8 @@ export default function Cart() {
   }
 
   async function handleAddMealToCart(meal) {
-
     const response = await fetch(
-      `${prod}api/meals`,
+      `${apiUrl}/api/meals`,
       {
         method: "PATCH",
         body: JSON.stringify(meal),
@@ -39,24 +36,24 @@ export default function Cart() {
         },
       }
     );
-    const json = await response.json();
+    await response.json();
     
     dispatchCartAction({
       type: 'ADD_ITEM', 
       meal
     })
 
-    dispatchCartAction({ 
-      type: 'SET_CART', 
-      items: json 
-    });
+    // dispatchCartAction({ 
+    //   type: 'SET_CART', 
+    //   items: json 
+    // });
 
   }
 
   async function handleRemoveMealToCart(id) {
     const item = {  id }
     const response = await fetch(
-      `${prod}api/meals/removeItem`,
+      `${apiUrl}/api/meals/removeItem`,
       {
         method: "PATCH",
         body: JSON.stringify(item),
@@ -67,37 +64,51 @@ export default function Cart() {
       }
     );
 
-    const json = await response.json();
+    await response.json();
 
     dispatchCartAction({
       type: 'REMOVE_ITEM', 
       id
     })
 
-    dispatchCartAction({ 
-      type: 'SET_CART', 
-      items: json 
-    });
+    // dispatchCartAction({ 
+    //   type: 'SET_CART', 
+    //   items: json 
+    // });
   }
 
 
 
   return (
     <Modal className='cart' open={userProgressCtx.progress === 'cart'}>
-        <h2>Your Cart</h2>
+        <div className='cart-header'>
+          <h2>Your Cart</h2>
+          <p>{items.length} {items.length > 1  ? 'Items' : 'Item'}</p>
+        </div>
+
+        {items.length > 0 &&         
+          <ul className='cart-description'>
+            <li key='desc1'>Product Details</li>
+            <li key='desc2'> Quantity</li>
+            <li key='desc3'>Price</li>
+            <li key='desc4' className='total-header'>Total</li>
+          </ul>
+        }
+
         <ul>
-            {items.map(item => (
+            {items.map((item, index) => (
               <CartItem 
-                key={item.productId} 
+                key={index} 
                 name={item.name} 
                 quantity={item.quantity} 
-                price={item.price}                 
+                price={item.price}
+                image={item.image}        
                 onIncreaase={() => handleAddMealToCart(item)}
                 onDecrease={() => handleRemoveMealToCart(item.productId)}
                  />
             ))}
         </ul>
-        <p className='cart-total'>{currencyFormatter.format(cartTotal)}</p>
+        {items.length > 0 && <p className='cart-total'>{currencyFormatter.format(cartTotal)}</p>}
         <p className='modal-actions'>
             <Button onClick={handleCloseCart} textOnly>Close</Button>
             {items.length > 0 && <Button onClick={handleShowCheckout}>Go to Checkout</Button>}

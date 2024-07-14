@@ -33,12 +33,19 @@ const Navbar = () => {
           <h1>React Food Order</h1>
         </Link>
         <nav>
-          {user && (
-            <div>
-              <span>{user.email}</span>
-              <button onClick={handleClick}>Log out</button>
-              {user && <Button onClick={handleShowCart} textOnly>Cart ({totalCartItems})</Button>}
-            </div>
+        {user && (
+            <Button onClick={handleShowCart} className="cart-button" textOnly>
+              <i className="fas fa-shopping-cart">
+                {totalCartItems > 0 && (
+                  <span className="cart-count">{totalCartItems}</span>
+                )}
+              </i>
+            </Button>
+          )}
+          {user && (<div>
+            {/* <span>{user.email}</span> */}
+            <button onClick={handleClick}>Log out</button>
+          </div>
           )}
           {!user && (
             <div>

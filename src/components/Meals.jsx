@@ -4,14 +4,13 @@ import { useAuthContext } from '../hooks/useAuthContext';
 
 export default function Meals() {
     const[loadedMeals, setLoadedMeals] = useState([]);
-    const prod = "https://rfo-api.onrender.com/api/meals/get"
-    // const local = "http://localhost:3000/api/meals/get"
+    const apiUrl = process.env.REACT_APP_API_URL;
     const { user } = useAuthContext();
 
     useEffect(() => {
         async function fetchMeals() {
             //const response = await fetch(prod);
-            const response = await fetch(prod, {
+            const response = await fetch(`${apiUrl}/api/meals/get`, {
                 method: "get",
                 headers: {
                     "Content-type": "application/json",
@@ -27,7 +26,7 @@ export default function Meals() {
         }
 
         fetchMeals();
-    }, [user]);
+    }, [user, apiUrl]);
 
     return (
         <ul id='meals'>{loadedMeals.map(meal => (

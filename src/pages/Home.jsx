@@ -5,10 +5,10 @@ const Home = () => {
 
 
   return (
-    <div className="home">
+    <>
       <Meals />
       <Cart />
-    </div>
+    </>
   );
 };
 
