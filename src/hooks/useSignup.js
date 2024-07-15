@@ -5,16 +5,14 @@ export const useSignup = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
   const { dispatch } = useAuthContext();
-  //const prod = "https://rfo-api.onrender.com/api/user/signup"
-  const prod = "http://localhost:3000/api/user/signup"
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const signup = async (email, password, confirmPassword) => {
     setIsLoading(true);
     setError(null);
 
     const response = await fetch(
-      //process.env.REACT_APP_API_URL + "/api/user/signup",
-      prod,
+      `${apiUrl}/api/user/signup`,
       {
         method: "POST",
         headers: { "Content-type": "application/json" },
