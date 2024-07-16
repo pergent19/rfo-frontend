@@ -1,5 +1,6 @@
 import Meals from "../components/Meals";
 import Cart from "../components/Cart";
+import Checkout from "../components/Checkout";
 
 const Home = () => {
 
@@ -8,6 +9,7 @@ const Home = () => {
     <>
       <Meals />
       <Cart />
+      <Checkout />
     </>
   );
 };

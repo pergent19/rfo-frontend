@@ -43,11 +43,6 @@ export default function Cart() {
       meal
     })
 
-    // dispatchCartAction({ 
-    //   type: 'SET_CART', 
-    //   items: json 
-    // });
-
   }
 
   async function handleRemoveMealToCart(id) {
@@ -70,11 +65,6 @@ export default function Cart() {
       type: 'REMOVE_ITEM', 
       id
     })
-
-    // dispatchCartAction({ 
-    //   type: 'SET_CART', 
-    //   items: json 
-    // });
   }
 
 
