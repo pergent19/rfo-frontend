@@ -8,7 +8,9 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import Button from './UI/Button';
 import Error from './Error';
 
+
 export default function Checkout() {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const cartCtx = useContext(CartContext);
   const { dispatchCartAction } = useCartContext();
   const userProgressCtx = useContext(UserProgressContext);
@@ -27,7 +29,6 @@ export default function Checkout() {
 
   async function handleSubmit(event) {
     event.preventDefault(); // Prevent default form submission behavior
-    console.log("hi")
     const fd = new FormData(event.target);
     const customerData = Object.fromEntries(fd.entries());
   
@@ -41,7 +42,7 @@ export default function Checkout() {
   
     try {
       const response = await fetch(
-        "http://localhost:3000/api/order/create",
+        `${apiUrl}/api/order/create`,
         {
           method: "POST",
           body: JSON.stringify(order),
@@ -83,7 +84,7 @@ export default function Checkout() {
     clearData();
     //need to update the MongoDB backend
     const response = await fetch(
-      "http://localhost:3000/api/order/clear",
+      `${apiUrl}/api/order/clear`,
       {
         method: "PATCH",
         headers: {
